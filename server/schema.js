@@ -1,5 +1,5 @@
 const {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList, GraphQLSchema} = require('graphql')
-const Db = require('.db')
+const Db = require('./db')
 
 const Person = new GraphQLObjectType({
     name: 'Person',

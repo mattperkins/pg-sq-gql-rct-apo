@@ -1,4 +1,4 @@
-# PostgreSQL, Sequelize, GraphQL, React, Apollo
+# Node, Express, PostgreSQL, Sequelize, GraphQL, React, Apollo
 
 CLIENT
 
@@ -12,6 +12,7 @@ CLIENT
 ## npm build
 
 
+
 SERVER
 
 # INSTALL 
@@ -22,6 +23,17 @@ SERVER
 ## localhost: 4000
 # DEPLOY 
 ## npm build
+
+
+
+DATABASE
+
+```
+node db.js
+
+```
+
+
 
 SCHEMA
 
