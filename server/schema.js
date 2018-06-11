@@ -1,33 +1,42 @@
 const {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList, GraphQLSchema} = require('graphql')
 const Db = require('./db')
 
+// Models
 const Person = new GraphQLObjectType({
     name: 'Person',
     description: 'This represents a Person',
     fields: ()=>{
         return {
-            id: {
+            id:{
                 type: GraphQLInt,
                 resolve(person){
                     return person.id
                 }
             },
-            firstName: {
+            firstName:{
                 type: GraphQLString,
                 resolve(person){
                     return person.firstName
                 }
             },
-            lastName: {
+            lastName:{
                 type: GraphQLString,
                 resolve(person){
                     return person.lastName
                 }
             },
-            email: {
+            email:{
                 type: GraphQLString,
                 resolve(person){
                     return person.email
+                }
+            },
+            posts:{
+                type: new GraphQLList(Post),
+                resolve(person){
+                    // Provided by sequelize due to relationships in database
+                    // (see "Define table relationships" comment in db.js)
+                    return person.getPosts()
                 }
             }
         }
@@ -56,11 +65,20 @@ const Post = new GraphQLObjectType({
                 resolve(post){
                     return post.content
                 }
+            },
+            person:{
+                type: Person,
+                resolve(post){
+                    // Provided by sequelize due to relationships in database
+                    // (see "Define table relationships" comment in db.js)
+                    return post.getPerson()
+                }
             }           
          }
      }
 })
 
+// Query
 const Query = new GraphQLObjectType({
     name: 'Query',
     description: 'This is a root query',
@@ -78,6 +96,12 @@ const Query = new GraphQLObjectType({
                 },
                 resolve(root, args) {
                     return Db.models.person.findAll({where: args})
+                }
+            },
+            posts:{
+                type: new GraphQLList(Post),
+                resolve(root, args){
+                    return Db.models.post.findAll({where: args})
                 }
             }
         }

@@ -7,7 +7,7 @@ CLIENT
 # RUN 
 ## yarn start 
 # ENDPOINTS 
-## localhost: 3000
+## localhost:3000
 # DEPLOY 
 ## npm build
 
@@ -38,9 +38,20 @@ node db.js
 # SCHEMA
 
 # ENDPOINTS 
-## localhost: 4000/graphql
+## localhost:4000/graphql
 
 ## QUERIES
+
+```
+{
+    people{
+        id
+        firstName
+        lastName
+        email
+    }
+}
+```
 
 ```
 {
@@ -49,10 +60,36 @@ node db.js
     lastName
     firstName
     email
-  	
+    posts{
+        title
+        content
+    }
   }
 }
 ```
 
+```
+{
+  posts{
+    title
+    content
+  }
+}
+```
+
+```
+{
+  posts{
+    title
+  	content
+    person{
+      id
+      firstName
+      lastName
+      email
+    }
+  }
+}
+```
 
 ## MUTATIONS
