@@ -35,11 +35,24 @@ node db.js
 
 
 
-SCHEMA
+# SCHEMA
 
 # ENDPOINTS 
 ## localhost: 4000/graphql
 
-QUERIES
+## QUERIES
 
-MUTATIONS
+```
+{
+  people{
+    id
+    lastName
+    firstName
+    email
+  	
+  }
+}
+```
+
+
+## MUTATIONS
