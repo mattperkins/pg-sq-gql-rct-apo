@@ -63,6 +63,11 @@ Connection.sync({force: true}).then(()=> {
             firstName: Faker.name.firstName(),
             lastName: Faker.name.lastName(),
             email: Faker.internet.email(),
+        }).then(person => {
+            return person.createPost({
+                title: `An epic post by ${person.firstName}`,
+                content: 'This is probably the best thing ever written.'
+            })
         })
     })
 
