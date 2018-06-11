@@ -1,11 +1,13 @@
-import Sequelize from 'sequelize'
-import _ from 'lodash'
-import Faker from 'faker'
+const Sequelize = require('sequelize')
+const _ = require('lodash')
+const Faker = require('faker')
+
+
 
 const Connection = new Sequelize(
-    'relay',
-    'postgres',
-    'postgres',
+    'postie',
+    '',
+    '',
     {
         dialect: 'postgres',
         host: 'localhost'
@@ -45,7 +47,7 @@ const Post = Connection.define('post', {
 
 // Define table relationships
 Person.hasMany(Post)
-Post.hasMany(Person)
+Post.belongsTo(Person)
 
 
 // Open connection to db and install/sync tables
@@ -66,4 +68,4 @@ Connection.sync({force: true}).then(()=> {
 
 })
 
-export default Connection
+module.exports = Connection
