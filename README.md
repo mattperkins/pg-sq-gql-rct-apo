@@ -29,10 +29,28 @@ SERVER
 DATABASE
 
 ```
-node db.js
+Spawn db:
+
+$ node db.js 
 
 ```
+run postgres server
+psql databaseName
+```
 
+```
+=# \d schema dump
+=# \dt schema dump condensed
+=# \l list all databases
+```
+
+```
+=# select * from people;
+```
+
+```
+=# select * from people where id=11;
+```
 
 
 # SCHEMA
@@ -92,4 +110,12 @@ node db.js
 }
 ```
 
-## MUTATIONS
+## MUTATION
+
+```
+mutation addPerson {
+  addPerson(firstName: "Fred", lastName: "Bloggs", email: "fred@bloggs.com"){
+    id
+  }
+}
+```

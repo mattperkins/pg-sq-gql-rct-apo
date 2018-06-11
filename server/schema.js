@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList, GraphQLSchema} = require('graphql')
+const {GraphQLObjectType, GraphQLInt, GraphQLString, GraphQLList, GraphQLSchema, GraphQLNonNull} = require('graphql')
 const Db = require('./db')
 
 // Models
@@ -108,8 +108,40 @@ const Query = new GraphQLObjectType({
     }
 })
 
+// Mutations
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    description: 'Functions to create content',
+    fields(){
+        return{
+            addPerson:{
+                type: Person,
+                args:{
+                    firstName:{
+                        type: new GraphQLNonNull(GraphQLString)
+                    },
+                    lastName:{
+                        type: new GraphQLNonNull(GraphQLString)
+                    },
+                    email:{
+                        type: new GraphQLNonNull(GraphQLString)
+                    }
+                },
+                resolve(_, args){
+                    return Db.models.person.create({
+                        firstName: args.firstName,
+                        lastName: args.lastName,
+                        email: args.email.toLowerCase()
+                    })
+                }
+            }
+        }
+    }
+})
+
 const Schema = new GraphQLSchema({
-    query: Query
+    query: Query,
+    mutation: Mutation
 })
 
 module.exports = Schema
