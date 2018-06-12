@@ -39,8 +39,9 @@ psql databaseName
 ```
 
 ```
-=# \d schema dump
-=# \dt schema dump condensed
+=# \d (schema dump)
+=# \dt (schema dump condensed)
+=# \d tableName
 =# \l list all databases
 ```
 
